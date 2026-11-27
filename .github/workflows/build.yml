@@ -1,4 +1,4 @@
-name: Build Flutter APK
+name: Build Flight Tracker APK
 
 on:
   push:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Create & Configure Project
         run: |
-          flutter create --org com.maple.radar --platforms android temp_app
+          flutter create --org com.flighttracker.s3 --platforms android temp_app
           cp pubspec.yaml temp_app/pubspec.yaml
           cp lib/main.dart temp_app/lib/main.dart
           cp AndroidManifest.xml temp_app/android/app/src/main/AndroidManifest.xml
@@ -36,5 +36,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Maple-S3-Radar-APK
+          name: Flight-Tracker-APK
           path: temp_app/build/app/outputs/flutter-apk/app-release.apk
