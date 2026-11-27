@@ -1,1 +1,22 @@
+name: flight_tracker
+description: ADS-B BLE Flight Tracker for LILYGO T-Display S3
+publish_to: 'none'
+version: 1.0.0+1
 
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_blue_plus: ^1.32.0
+  http: ^1.2.0
+  permission_handler: ^11.3.0
+  geolocator: ^13.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
