@@ -27,6 +27,7 @@ jobs:
           flutter create --org com.flighttracker.s3 --platforms android temp_app
           cp lib/main.dart temp_app/lib/main.dart
           cp AndroidManifest.xml temp_app/android/app/src/main/AndroidManifest.xml
+          sed -i 's/compileSdk = flutter.compileSdkVersion/compileSdk = 37/g' temp_app/android/app/build.gradle.kts
           cd temp_app
           flutter pub add flutter_blue_plus http permission_handler geolocator
           flutter build apk --release
