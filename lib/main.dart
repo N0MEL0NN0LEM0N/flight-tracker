@@ -50,7 +50,7 @@ class _TrackerHomePageState extends State<TrackerHomePage> {
   BluetoothCharacteristic? _txChar;
 
   String _statusMsg = "T-Display S3 전원을 켜고 연결을 눌러주세요.";
-  List> _detectedPlanes = [];
+  List _detectedPlanes = [];
 
   static const String targetDeviceName = "Flight-Tracker-S3";
   static const String serviceUuid = "4fafc201-1fb5-459e-8fcc-c5c9c331914b";
@@ -120,7 +120,7 @@ class _TrackerHomePageState extends State<TrackerHomePage> {
       }
 
       setState(() => _statusMsg = "연결 중...");
-      await found.connect(autoConnect: false);
+      await found.connect(license: License.free, autoConnect: false);
       await found.requestMtu(512);
 
       found.connectionState.listen((state) {
@@ -186,7 +186,7 @@ class _TrackerHomePageState extends State<TrackerHomePage> {
       int nearestAlt = 0;
       int nearestSpd = 0;
 
-      final parsedPlanes = >[];
+      final List parsedPlanes = [];
 
       for (final ac in acList) {
         if (ac["lat"] == null || ac["lon"] == null) continue;
