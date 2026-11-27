@@ -20,17 +20,15 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.0'
           channel: 'stable'
 
       - name: Create & Configure Project
         run: |
           flutter create --org com.flighttracker.s3 --platforms android temp_app
-          cp pubspec.yaml temp_app/pubspec.yaml
           cp lib/main.dart temp_app/lib/main.dart
           cp AndroidManifest.xml temp_app/android/app/src/main/AndroidManifest.xml
           cd temp_app
-          flutter pub get
+          flutter pub add flutter_blue_plus http permission_handler geolocator
           flutter build apk --release
 
       - name: Upload APK
