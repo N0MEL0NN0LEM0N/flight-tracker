@@ -228,8 +228,9 @@ class _TrackerHomePageState extends State<TrackerHomePage> {
         }
       }
 
+      // 가까운 순 정렬 후 상위 10대만 전송 (BLE 512바이트 한도 초과 방지)
       parsedPlanes.sort((a, b) => (a["dist"] as double).compareTo(b["dist"] as double));
-      final topList = parsedPlanes.take(14).toList();
+      final topList = parsedPlanes.take(10).toList();
 
       final itemsStr = topList.map((p) {
         final dStr = (p["dist"] as double).toStringAsFixed(1);
@@ -243,7 +244,7 @@ class _TrackerHomePageState extends State<TrackerHomePage> {
 
       setState(() {
         _detectedPlanes = parsedPlanes;
-        _statusMsg = "전송 완료: 반경 ${maxKm.round()}km 내 ${parsedPlanes.length}대 포착";
+        _statusMsg = "전송 완료: 반경 ${maxKm.round()}km 내 ${parsedPlanes.length}대 포착 (상위 ${topList.length}대 표시)";
       });
     } catch (e) {
       setState(() => _statusMsg = "전송 중 오류: $e");
